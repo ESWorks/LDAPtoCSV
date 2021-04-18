@@ -30,13 +30,14 @@ namespace LDAPtoCSV
                     string org = user.VoiceTelephoneNumber;
                     if (string.IsNullOrEmpty(email)) continue;
                     Console.WriteLine($@"{first},{last},{email},{org}");
-                }
-                // do whatever here - "found" is of type "Principal" - it could be user, group, computer.....          
+                }      
             }
         }
+
+        //old method to read GAL
         private static void Read()
         {
-            List<string> emails = GetGAL(args[1],args[2], "LDAP://doc");
+            List<string> emails = GetGAL(args[1],args[2], args[0]);
             emails.Sort();
 
             foreach (string item in emails)
@@ -45,6 +46,7 @@ namespace LDAPtoCSV
             }
         }
 
+        // search by directory, required username and pass.
         public static List<string> GetGAL(string UserName, string Password, string server)
         {
             try
